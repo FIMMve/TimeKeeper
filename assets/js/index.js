@@ -30,18 +30,13 @@ for(const division of divisions){
     divisionMultiplier += 1
 
     division.addEventListener("click", () => {
-        if(division.classList.contains("selected")){
-            division.classList.remove("selected")
-            divisions[0].classList.add("selected")
-        }else{
-            for(const activeDivision of divisions){
-                activeDivision.classList.remove("selected")
-            }
-            division.classList.add("selected")
-            activatedDivision = division.multiplier
-
-            updateTempo()
+        for(const activeDivision of divisions){
+            activeDivision.classList.remove("selected")
         }
+        division.classList.add("selected")
+        activatedDivision = division.multiplier
+
+        updateTempo()
     })
 }
 
