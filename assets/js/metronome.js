@@ -1,5 +1,5 @@
 class Metronome{
-    constructor(tempo = 0, beats = 0){
+    constructor(tempo = 0, beats = 1){
         this.audioContext = null
         this.notesInQueue = []
         this.currentBeatInBar = 0
@@ -10,6 +10,10 @@ class Metronome{
         this.nextNoteTime = 0.0
         this.isRunning = false
         this.interval = null
+    }
+
+    changeBeatsPerBar(beats){
+        this.beatsPerBar = beats
     }
 
     nextNote(){
@@ -34,9 +38,9 @@ class Metronome{
         const oscillator = this.audioContext.createOscillator()
         const envelope = this.audioContext.createGain()
 
-        oscillator.frequency.value = 800
-
-        // TO DO: configure different frecuencys to each type of beat (first, secondary, divisions)
+        oscillator.frequency.value = (beatNumber % this.beatsPerBar == 0) 
+            ? 1500 
+            : 800
 
         envelope.gain.value = 1
         envelope.gain.exponentialRampToValueAtTime(1, time + 0.001)
