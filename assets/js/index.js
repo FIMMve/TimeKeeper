@@ -21,6 +21,7 @@ playSwitch.addEventListener("click", () => {
 })
 
 const divisions = document.querySelectorAll(".divisions")
+
 let divisionMultiplier = 1
 let activatedDivision = 1
 
@@ -31,6 +32,7 @@ for(const division of divisions){
     division.addEventListener("click", () => {
         if(division.classList.contains("selected")){
             division.classList.remove("selected")
+            divisions[0].classList.add("selected")
         }else{
             for(const activeDivision of divisions){
                 activeDivision.classList.remove("selected")
@@ -48,7 +50,7 @@ tempoRange.value = localStorage.getItem("tempo")
 const updateTempo = () => {
     tempoValue.textContent = tempoRange.value + " BPM"
     metronome.tempo = tempoRange.valueAsNumber * activatedDivision
-    metronome.beats = 4 * activatedDivision
+    metronome.changeBeatsPerBar(activatedDivision) 
 
     localStorage.setItem("tempo", tempoRange.value)
 }
