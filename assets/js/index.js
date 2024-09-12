@@ -20,6 +20,13 @@ playSwitch.addEventListener("click", () => {
     metronome.startStop()
 })
 
+document.addEventListener("keydown", event => {
+    if(event.code === "Space"){
+        metronome.startStop()
+        playSwitch.checked = !playSwitch.checked
+    }
+})
+
 const divisions = document.querySelectorAll(".divisions")
 
 let divisionMultiplier = 1
@@ -57,9 +64,23 @@ decreaseTempo.addEventListener("click", () => {
     updateTempo()
 })
 
+document.addEventListener("keydown", event => {
+    if(event.code == "ArrowLeft"){
+        tempoRange.value = tempoRange.valueAsNumber - 5
+        updateTempo()
+    }
+})
+
 increaseTempo.addEventListener("click", () => {
     tempoRange.value = tempoRange.valueAsNumber + 5
     updateTempo()
+})
+
+document.addEventListener("keydown", event => {
+    if(event.code == "ArrowRight"){
+        tempoRange.value = tempoRange.valueAsNumber + 5
+        updateTempo()
+    }
 })
 
 tempoRange.addEventListener("input", () => {
